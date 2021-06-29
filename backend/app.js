@@ -33,7 +33,7 @@ mongoose
     dbName: "eshop-database",
   })
   .then(() => {
-    console.log("Database Connection is ready...");
+    console.log("Database connected");
   })
   .catch((err) => {
     console.log(err);
