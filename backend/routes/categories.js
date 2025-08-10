@@ -38,11 +38,17 @@ router.post('/', async (req,res)=>{
 
 
 router.put('/:id',async (req, res)=> {
+    // Find existing category to preserve values if not provided
+    const existingCategory = await Category.findById(req.params.id);
+    if(!existingCategory) {
+        return res.status(400).send('Invalid Category')
+    }
+
     const category = await Category.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
-            icon: req.body.icon || category.icon,
+            icon: req.body.icon || existingCategory.icon,
             color: req.body.color,
         },
         { new: true}
